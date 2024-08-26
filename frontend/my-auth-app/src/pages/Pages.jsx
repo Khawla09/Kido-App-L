@@ -10,37 +10,15 @@ import Cart from "../components/Cart"
 
 function Pages() {
   const isUserSignedin = !!localStorage.getItem('token')
-  // const [cartItems, setCartItems] = useState([]);
-  // const [cartCount, setCartCount] = useState(0);
-  // const addToCart = (product) => {
-  //   const existingItem = cartItems.find(item => item.productId === product._id);
-  //   if (existingItem) {
-  //     updateCartItem(product._id, existingItem.quantity + 1);
-  //   } else {
-  //     setCartItems([...cartItems, { ...product, quantity: 1 }]);
-  //     setCartCount(cartCount + 1);
-  //   }
-  // };
 
-  // const updateCartItem = (productId, quantity) => {
-  //   axios.put(`http://localhost:3005/api/cart/${productId}`, { quantity })
-  //     .then(response => {
-  //       setCartItems(response.data.cartItems);
-  //       const newCartCount = response.data.cartItems.reduce((total, item) => total + item.quantity, 0);
-  //       setCartCount(newCartCount);
-  //     })
-  //     .catch(error => {
-  //       console.error("Error updating cart item", error);
-  //     });
-  //   }
   return (
     <div>
         <Routes>
   <Route path="/" element={<Home />}  />
   <Route path="/login" element={<Login />}  />
   <Route path="/signup" element={<SignUp />}  />
-  {isUserSignedin && <Route path="/account" element={<Account />}  />}
-  <Route path='/category/:category' element = {<Type  />} />
+  {isUserSignedin && <Route path="/" element={<Home />}  />}
+  <Route path='/category/:category' element = {<Type />} />
   <Route path='/products/:id' element ={<Product  />} />
   <Route path= "/cart" element={<Cart  />} />
 </Routes>
@@ -69,3 +47,26 @@ export default Pages
         </main>
       </div>
     </Router> */}
+      // const [cartItems, setCartItems] = useState([]);
+  // const [cartCount, setCartCount] = useState(0);
+  // const addToCart = (product) => {
+  //   const existingItem = cartItems.find(item => item.productId === product._id);
+  //   if (existingItem) {
+  //     updateCartItem(product._id, existingItem.quantity + 1);
+  //   } else {
+  //     setCartItems([...cartItems, { ...product, quantity: 1 }]);
+  //     setCartCount(cartCount + 1);
+  //   }
+  // };
+
+  // const updateCartItem = (productId, quantity) => {
+  //   axios.put(`http://localhost:3005/api/cart/${productId}`, { quantity })
+  //     .then(response => {
+  //       setCartItems(response.data.cartItems);
+  //       const newCartCount = response.data.cartItems.reduce((total, item) => total + item.quantity, 0);
+  //       setCartCount(newCartCount);
+  //     })
+  //     .catch(error => {
+  //       console.error("Error updating cart item", error);
+  //     });
+  //   }

@@ -7,7 +7,7 @@
   --padding: 10px;
 }
 body {
-  margin: 1px; /* Remove default margin */
+  margin: 4px; /* Remove default margin */
   padding: 0; /* Remove default padding */
   font-family: 'Poppins', sans-serif; /* Apply a clean, modern font */
   font-size: 16px; /* Set a base font size */

@@ -4,13 +4,17 @@ import { useParams } from 'react-router-dom';
 import axios from "axios"
 import { CartContext } from '../components/CartContext';
 import styled from "styled-components"
+// import {UserContext} from "../components/UserContext"
+import { useCart } from '../components/CartContext';
 // import "../styling/prodStyle.css"
 
 function Product() {
+  // const { userId } = useContext(UserContext);
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [error, setError] = useState(null);
-    const { addToCart } = useContext(CartContext);
+    const { addToCart } = useCart();
+//*************************************** */
     useEffect(() => {
       axios.get(`http://localhost:3005/api/products/${id}`)
         .then(response => {
@@ -29,16 +33,11 @@ function Product() {
     if (!product) {
       return <div>Loading...</div>;
     }
-    const handleAddToCart =(cartItem)=>{
-      cartItem = {
-        productId: product._id,
-        name: product.name,
-        price: product.price,
-        image: product.images[0],
-        quantity: 1,
-      }
-      addToCart(cartItem)
-    }
+    const handleAddToCart = () => {
+
+      addToCart(product._id);
+      alert('product added succesfully')
+    };
   
   return (
   <div style={styles.container} >

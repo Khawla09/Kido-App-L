@@ -19,7 +19,7 @@ const styling = {
   hero:{
     position: "relative",
   height: "100vh", /* Full viewport height */
-  background:"white",
+  // background:"white",
   background: "url(https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)no-repeat center center/cover",
   margin:'5px',
   alignItems: "center",
@@ -59,32 +59,6 @@ marginBottom: '0.5rem'
   }
   
 }
-// .hero {
-//   position: relative;
-//   height: 100vh; /* Full viewport height */
-//   background: url('your-hero-image.jpg') no-repeat center center/cover;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   text-align: center;
-//   color: #fff; /* Adjust color based on the image */
-// }
 
-// .hero-content {
-//   max-width: 80%;
-//   padding: 20px;
-//   background: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background for better text readability */
-//   border-radius: 10px; /* Optional: rounded corners */
-// }
-
-// h1 {
-//   font-size: 3rem; /* Adjust as needed */
-//   margin-bottom: 0.5rem;
-// }
-
-// p {
-//   font-size: 1.25rem; /* Adjust as needed */
-//   margin: 0;
-// }
 
 export default Hero

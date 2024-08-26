@@ -3,9 +3,9 @@ import { GiClothes } from "react-icons/gi";
 import { MdToys } from "react-icons/md";
 import { Link, NavLink } from 'react-router-dom';
 import { GiSonicShoes } from "react-icons/gi";
-import React,{useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom';
-import axios from "axios"
+import React from 'react'
+
+
 
 function Category() {
   return(

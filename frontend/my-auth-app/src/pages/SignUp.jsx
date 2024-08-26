@@ -1,7 +1,9 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useContext} from 'react'
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
+// import { AuthContext } from '../components/AuthContext';
 function SignUp() {
+// const {signup} = useContext(AuthContext)
   const [user, setUsers] = useState([]);
   const [email, setEmail] =useState("");
   const [username, setUsername] =useState("");
@@ -14,7 +16,7 @@ const navigate = useNavigate()
   //fetch users
   const ftechUsers =()=>{
    axios
-   .get("http://localhost:3005/register")
+   .get("http://localhost:3005/api/user/register")
    .then((res=>{
     console.log(res.data)
    }))
@@ -22,8 +24,9 @@ const navigate = useNavigate()
   }
   //handle register
    const handleRegister = (e)=>{
+   
 e.preventDefault();
-axios.post("http://localhost:3005/register",{email, username, password})
+axios.post("http://localhost:3005/api/user/register",{email, username, password})
 .then(()=>{
   alert("Registered Successfully")
   setEmail(""),

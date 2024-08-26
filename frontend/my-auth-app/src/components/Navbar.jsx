@@ -26,9 +26,12 @@ const {cartItems} =  useContext(CartContext);
       <ul style={style.ul}>
 
         {isUserSignedin ? (<>
-        <Link to='/cart'><li>Cart(Account compo)</li></Link>
+        <Link to='/cart'>
+        <li style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/>  10({cartItems.length})
+        </li></Link>
         <li><button onClick={handleSignout} className='signout-btn'>Sign OUt</button></li>
-        </>): <> 
+        </>)
+        : <> 
         <Link to="/cart" className="cart-link">
         <p style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/> ({cartItems.length})</p>
       </Link>

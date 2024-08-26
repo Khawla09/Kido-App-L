@@ -1,58 +1,84 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useContext } from 'react';
-import { CartContext } from './CartContext';
-
+// import { CartContext } from './CartContext';
+import { useCart } from './CartContext';
 const Cart = () => {
-  const { cartItems, updateCartItem, removeFromCart } = useContext(CartContext);
+  // const { cartItems, updateCartItem, removeFromCart} = useContext(CartContext);
+const {cartItems, removeFromCart, updateQuantity, loading , getCartItems} = useCart();
+if(loading) return <p>Loading cart...</p>
+// const handleQunatityChange = (productId, qunatity)=>{
+// updateQuantity(productId, qunatity)
+// }
+const handleIncrease = (cartId, productId) => {
+  updateQuantity(cartId, productId, quantity + 1);
+};
 
-  const handleUpdateCartItem = async (productId, quantity) => {
-    try {
-      const response = await axios.put(`http://localhost:3005/api/cart/${productId}`, { quantity });
+// Function to handle decreasing quantity
+const handleDecrease = (cartId, productId, quantity) => {
+  if (quantity > 1) {
+    updateQuantity(cartId, productId, quantity - 1);
+  } else {
+    removeFromCart(cartId);
+  }
+};
+ const handleRemove = (productId) =>{
+  removeFromCart(productId)
+ }
+ console.log(cartItems)
 
-      // Update the cart in the context
-      updateCartItem(productId, response.data.updatedItem.quantity);
-    } catch (error) {
-      console.error('Error updating cart:', error);
-    }
-  };
-
-  const handleRemoveFromCart = async (productId) => {
-    try {
-      const response = await axios.delete(`http://localhost:3005/api/cart/${productId}`);
-    
-      if (response.status === 200) {
-        removeFromCart(productId);
-      } else {
-        console.error('Failed to remove from cart:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error removing from cart:', error.response?.data?.message || error.message);
-    }
-    console.log(":remmoving item with id",productId )
-  };
 
   return (
     <div>
       <h2>Your Cart</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item._id}>
-              <p>{item.name}</p>
-              {/* <img src={item.data.images[0]} alt="NA image" /> */}
-              {/* <img src={item.images[0]} alt=""  /> */}
-              <p>Quantity: {item.quantity}</p>
-              <button onClick={() => handleUpdateCartItem(item.productId, item.quantity + 1)}>+</button>
-              <button onClick={() => handleUpdateCartItem(item.productId, item.quantity - 1)}>-</button>
-              <button onClick={() => handleRemoveFromCart(item.productId)}>Remove</button>
-            </li>
-          ))}
-        </ul>
-      )}
+      {cartItems.length > 0 ? (
+        cartItems.map(cartItem =>(
+          <div key={cartItem._id}>
+          {cartItem.items.length > 0 ? 
+           ( cartItem.items.map(item => (
+              <div key={item.product._id}>
+                <h3>{item.product.name || 'Product Name Missing'}</h3>
+                <p>Price: ${item.product.price}</p>
+                <img src={item.product.images[0]} alt="image not found" style={{height:"100px", maxWidth:"100px"}} />
+                <div>
+                <button onClick={() => handleDecrease(cartItem._id, item.product._id, item.quantity)}>-</button>
+                <span>quantity: {item.quantity}</span>
+                <button onClick={() => handleIncrease(cartItem._id, item.product._id, item.quantity)}>+</button>
+              </div>
+          
+            <button onClick={() => handleRemove(cartItem._id)}>Remove</button> 
+              </div>
+            ))
+          ) : (
+            <p>No items in this cart.</p>
+          )}
+        </div>
+      ))
+    ) : (
+      <div>Your cart is empty.</div>
+    )}
+        
     </div>
   );
 };
 
 export default Cart;
+
+ {/* // ) : (
+      //   <ul>
+      //     {cartItems.items.map((item) => ( */}
+      {/* //       <li key={item._id}>
+      //          <h3>{item.product.name || 'Product Name Missing'}</h3>
+      //          <p>Price: ${item.product.price}</p>
+      //         {/* <img src={item.data.images[0]} alt="NA image" /> */}
+      //         {/* <img src={item.images[0]} alt=""  /> */}
+      {/* //         <p>quantity:
+      //         <input type="number" min='1' value={item.quantity} onChange={(e)=> handleQunatityChange(item.product._id, parseInt(e.target.value,10))} /> 
+      //          </p>
+      //         {/* <button onClick={() => handleQunatityChange(item.product._id, item.quantity + 1)}>+</button>
+      //         <button onClick={() => handleQunatityChange(item.product._id, item.quantity - 1)}>-</button> */}
+      {/* //         <button onClick={() => handleRemove(item.product._id)}>Remove</button>
+      //       </li> */} 
+      {/* //     ))}
+      //   </ul> */}
+      // ) */}
+   
