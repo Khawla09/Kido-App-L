@@ -12,31 +12,30 @@ function Saisonal() {
     axios.get('http://localhost:3005/api/products/category/toys')
       .then(response => {
         setProducts(response.data.products);
-        console.log(products)
+        // console.log(products)
       })
       .catch(error => {
         console.error("There was an error fetching the products!", error);
       });
   }, []);
+
+
   return (
     <div> 
 <Wrapper>
       <h2 >Saisonal Picks</h2>
       <Splide  options={{
         perPage:3,
-        gap: "5rem",
-        arrows: false,
-        pagination: true,
-        drag:"free"
+        gap: "5rem",  arrows: false, pagination: true, drag:"free"
       }}> 
          {products.map((product)=>(
 
-<SplideSlide key={product.id}>
+<SplideSlide key={product._id}>
              {/* div = card */}
-        <Card key={product.id}> 
+        <Card > 
          {/* Link add the route to our recipes */}
           <Link to={`/products/${product._id}`}>
-          <div>
+          <div >
         <img src={`${product.images[0]} `}  alt="" />
         {/* <p>{product.images[0]}</p> */}
           </div>

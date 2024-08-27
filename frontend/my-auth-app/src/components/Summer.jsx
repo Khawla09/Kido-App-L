@@ -12,7 +12,7 @@ function Summer() {
     axios.get('http://localhost:3005/api/products/category/clothes')
       .then(response => {
         setProducts(response.data.products);
-        console.log(products)
+        // console.log(products)
       })
       .catch(error => {
         console.error("There was an error fetching the products!", error);
@@ -31,9 +31,9 @@ function Summer() {
       }}> 
          {products.map((product)=>(
 
-<SplideSlide key={product.id}>
+<SplideSlide key={product._id}>
              {/* div = card */}
-        <Card key={product.id}> 
+        <Card> 
          {/* Link add the route to our recipes */}
           <Link to={`/products/${product._id}`}>
           <div>

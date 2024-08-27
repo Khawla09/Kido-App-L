@@ -9,12 +9,14 @@ if(loading) return <p>Loading cart...</p>
 // const handleQunatityChange = (productId, qunatity)=>{
 // updateQuantity(productId, qunatity)
 // }
-const handleIncrease = (cartId, productId) => {
+const handleIncrease = (e, cartId, productId, quantity) => {
+  e.preventDefault()
   updateQuantity(cartId, productId, quantity + 1);
 };
 
 // Function to handle decreasing quantity
-const handleDecrease = (cartId, productId, quantity) => {
+const handleDecrease = (e, cartId, productId, quantity) => {
+  e.preventDefault()
   if (quantity > 1) {
     updateQuantity(cartId, productId, quantity - 1);
   } else {
@@ -22,6 +24,7 @@ const handleDecrease = (cartId, productId, quantity) => {
   }
 };
  const handleRemove = (productId) =>{
+
   removeFromCart(productId)
  }
  console.log(cartItems)
@@ -30,22 +33,23 @@ const handleDecrease = (cartId, productId, quantity) => {
   return (
     <div>
       <h2>Your Cart</h2>
-      {cartItems.length > 0 ? (
+      {cartItems && cartItems.length > 0 ? (
         cartItems.map(cartItem =>(
           <div key={cartItem._id}>
-          {cartItem.items.length > 0 ? 
+          {cartItem.items && cartItem.items.length > 0 ? 
            ( cartItem.items.map(item => (
               <div key={item.product._id}>
                 <h3>{item.product.name || 'Product Name Missing'}</h3>
                 <p>Price: ${item.product.price}</p>
                 <img src={item.product.images[0]} alt="image not found" style={{height:"100px", maxWidth:"100px"}} />
+            
                 <div>
-                <button onClick={() => handleDecrease(cartItem._id, item.product._id, item.quantity)}>-</button>
-                <span>quantity: {item.quantity}</span>
-                <button onClick={() => handleIncrease(cartItem._id, item.product._id, item.quantity)}>+</button>
+                <button onClick={(e) => handleDecrease(e, cartItem._id, item.product._id, item.quantity)}>-</button>
+                <span>quantity: {item.quantity }</span>
+                <button onClick={(e) => handleIncrease(e, cartItem._id, item.product._id, item.quantity)}>+</button>
               </div>
-          
             <button onClick={() => handleRemove(cartItem._id)}>Remove</button> 
+            <p>Total: {(item.product.price*item.quantity).toFixed(2)}</p>
               </div>
             ))
           ) : (

@@ -35,7 +35,7 @@ function Product() {
     }
     const handleAddToCart = () => {
 
-      addToCart(product._id);
+      addToCart(product._id, 1);
       alert('product added succesfully')
     };
   
@@ -54,7 +54,7 @@ function Product() {
             </button>
           ))}
         </div>
-      <button style={styles.button} type='submit' onClick={handleAddToCart}>Add Cart</button>
+      <button style={styles.button} type='submit' onClick={()=>handleAddToCart(product,1)}>Add Cart</button>
     
      </div>
       {/* Add more details as needed */}

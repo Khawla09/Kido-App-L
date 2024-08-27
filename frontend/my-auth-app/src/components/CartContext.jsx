@@ -24,38 +24,67 @@ export const CartProvider = ({ children }) => {
   }, []);
 
 //add to cart
-  const addToCart =async (productId, quantity = 1) => {
-    // const addToCart =async (productId, quantity ) => {
-    try {
-      const response = await axios.post('http://localhost:3005/api/cart', { productId, quantity }); 
-      setCartItems((prevCart) => {
-        if (!Array.isArray(prevCart)) prevCart = [];
-        const itemIndex = prevCart.findIndex(item => item.product && item.product._id === productId);
-        if (itemIndex > -1) {
-          const updatedCart = [...prevCart.items];
-          updatedCart[itemIndex].quantity += quantity;
-          // return updatedCart;
-          return { ...prevCart, items: updatedCart };
-        }
-        return { 
-          ...prevCart, 
-          items: [...prevCart.items, { product: { _id: productId }, quantity }] 
-      };
-        // return [...prevCart, response.data];
-      });
-    } catch (error) {
-      console.error('Error adding item to cart:', error);
-    }
-  };
+const addToCart = async (productId, quantity = 1) => {
+  try {
+    const response = await axios.post(`http://localhost:3005/api/cart`, { productId, quantity }); // Adjust the endpoint as needed
+    setCartItems((prevCart) => {
+      if (!Array.isArray(prevCart)) prevCart = [];
+      const itemIndex = prevCart.findIndex(item => item.product._id === productId);
+      if (itemIndex > -1) {
+        const updatedCart = [...prevCart];
+        updatedCart[itemIndex].quantity += quantity;
+        return updatedCart;
+      }
+      return [...prevCart, response.data];
+    });
+  } catch (error) {
+    console.error('Error adding item to cart:', error);
+  }
+};
+  // const addToCart =async (productId, initQuantity = 1) => {
+  //   // const addToCart =async (productId, quantity ) => {
+  //   try {
+  //      await axios.post('http://localhost:3005/api/cart', { productId, qunatity:initQuantity }); 
+  //     setCartItems((prevCart) => {
+  //       if (!Array.isArray(prevCart)) prevCart = [];
+  //       const itemIndex = prevCart.findIndex(item => item.product && item.product._id === productId);
+  //       // if (itemIndex > -1) {
+  //         if (itemIndex !== -1) {
+  //         // const updatedCart = [...prevCart.items];
+  //         const updatedCart = [...prevCart];
+  //         updatedCart[itemIndex].quantity = (updatedCart[itemIndex].quantity || 0) + initQuantity;
+  //         // updatedCart[itemIndex].quantity += initQuantity;
+  //         return updatedCart;
+  //         // return { ...prevCart, items: updatedCart };
+  //       }
+  //       else{
+  //         const newCartItem = {
+  //           product: {_id: productId},
+      
+  //           qunatity: initQuantity
+  //         }
+  //         console.log('New Cart Item:', newCartItem);
+  //         return [...prevCart, newCartItem]
+  //     //      return { 
+  //     //     ...prevCart, 
+  //     //     items: [...prevCart.items, { product: { _id: productId }, quantity: initQuantity }] 
+  //     // }; 
+  //       }
+      
+  //       // return [...prevCart, response.data];
+  //     });
+  //   } catch (error) {
+  //     console.error('Error adding item to cart:', error);
+  //   }
+  // };
   //update Qunatity
-//   useEffect(()=>{
-// updateQuantity()
-//   },[qunatity])
+
   const updateQuantity = async(cartId, productId, quantity) =>{
     try {
       const response = await axios.put(`http://localhost:3005/api/cart/${cartId}`, { productId, quantity }); 
       setCartItems((prevCart) => {
         if (!Array.isArray(prevCart)) prevCart = [];
+        //handle removal of item
         if (quantity <= 0) {
           return prevCart.filter(item => item._id !== cartId);
         }

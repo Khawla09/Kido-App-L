@@ -27,7 +27,7 @@ const {cartItems} =  useContext(CartContext);
 
         {isUserSignedin ? (<>
         <Link to='/cart'>
-        <li style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/>  10({cartItems.length})
+        <li style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/> ({cartItems.length})
         </li></Link>
         <li><button onClick={handleSignout} className='signout-btn'>Sign OUt</button></li>
         </>)

@@ -36,7 +36,7 @@ function Type() {
     }
     const handleAddToCart = (prodId) => {
 
-      addToCart(prodId);
+      addToCart(prodId,1);
       alert('product added succesfully')
     };
   
@@ -51,7 +51,7 @@ function Type() {
 
       <Link to={`/products/${elm._id}`}> <h2>{elm.name}</h2></Link> 
         <p className='product-price'>${elm.price}</p>
-        <div className="product-sizes" >
+        <div className="product-sizes" key={elm.id} >
           <p style={{fontWeight:"bold"}}>Ages</p>
           {elm.sizes.map((size, index) => (
             <button key={index} className="size-button">
