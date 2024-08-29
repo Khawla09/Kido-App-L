@@ -23,7 +23,7 @@ function Saisonal() {
   return (
     <div> 
 <Wrapper>
-      <h2 >Saisonal Picks</h2>
+      <h2 >Seasonal Picks</h2>
       <Splide  options={{
         perPage:3,
         gap: "5rem",  arrows: false, pagination: true, drag:"free"

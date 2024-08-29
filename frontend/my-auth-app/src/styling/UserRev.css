@@ -1,0 +1,91 @@
+/* App.css */
+.App {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .heading {
+    text-align: center;
+    color: #333;
+  }
+  
+  .form-container {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+  }
+  
+  .input-field, .textarea-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .textarea-field {
+    height: 80px;
+  }
+  
+  .submit-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #218838;
+  }
+  
+  .reviews-container {
+    margin: 20px 0;
+  }
+  
+  .review-item {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background-color: #e9ecef;
+    border: 1px solid #ccc;
+  }
+  
+  .review-item h3 {
+    margin: 0 0 10px;
+    color: #007bff;
+  }
+  
+  .review-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #e0a800;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  

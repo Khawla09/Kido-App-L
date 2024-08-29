@@ -11,7 +11,8 @@ const bodyParser = require("body-parser");
 const connectDB = require("./db/connectDb")
 //ROutes
 const productRouter = require("./routes/productRoute");
-const cartRouter = require("./routes/cartRoute")
+// const cartRouter = require("./routes/cartRoute")
+const itemRouter = require("./routes/itemRoute")
 const userRouter = require("./routes/userRoute")
 const data = require("./db/products");
 const Product = require("./models/productSchema")
@@ -46,8 +47,9 @@ app.get("/home",(req,res)=>{
 //seed 
 
 app.use("/api/products", productRouter);
-app.use("/api/user", userRouter)
-app.use("/api/cart", cartRouter)
+app.use("/api/user", userRouter);
+app.use("/api/reviews", itemRouter)
+// app.use("/api/cart", cartRouter)
 
 // app.use("/api/products", categoryRouter)
 app.get('/api/seed', async (req, res) => {

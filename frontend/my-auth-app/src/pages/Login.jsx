@@ -2,13 +2,15 @@ import React,{useState, useEffect} from 'react'
 
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
-import {useUser} from "../components/UserContext"
+import "../styling/signup.css"
 function Login() {
-  // const [user, setUsers] = useState([]);
+
   const navigate = useNavigate()
   const [username, setUsername] =useState("");
   const [password, setPassword] = useState("");
-  // const { loginUser } = useUser();
+
+  
+  
   // not neccessarry
   useEffect(()=>{
     ftechUsers()
@@ -50,21 +52,22 @@ function Login() {
     }
   }
   return (
-    <div>
-      <div className={formStyle}>
+    <div className='div-cont'>
+      <div className="login-container">
+       
         <form onSubmit={handleLogin}
         style={{display:'flex',flexDirection:"column", justifyContent:"center",alignItems:"center", padding:"10px"}} >
-     
-      <br />
+      <h1 >Login</h1>
+    
 
       <label htmlFor="username">Username</label>
-      <input name='username' type='text'  onChange={(e)=>setUsername(e.target.value)} style={{padding:"10px"}}/>
-      <br />
+      <input placeholder='Enter a valid Username' name='username' type='text' required  onChange={(e)=>setUsername(e.target.value)} style={{padding:"10px"}}/>
+   
 
       <label htmlFor="password">Password</label> 
-      <input name='password' type='password' onChange={e=>setPassword(e.target.value)} style={{padding:"10px"}}/>
+      <input  placeholder='Enter a valid Password' name='password' type='password' required onChange={e=>setPassword(e.target.value)} style={{padding:"10px"}}/>
 <br />
-<button type='submit'>SignIn</button>
+<button className='login-button' type='submit'>Login</button>
 
         </form>
       </div>

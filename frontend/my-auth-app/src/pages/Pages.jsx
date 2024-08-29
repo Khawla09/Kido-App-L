@@ -1,13 +1,17 @@
 import React,{useState} from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './Home'
-import Account from "./Account"
+// import Account from "./Account"
 import SignUp from "./SignUp"
 import Login from "./Login"
 import Product from './Product'
 import Type from './Type'
-import Cart from "../components/Cart"
 
+import Cart1 from "../pages/cart/Cart1"
+import Reviews from './Reviews'
+import UserRev from '../components/UserRev'
+import PrivacyPolicy from './Privacypolicy'
+import TermsOfService from './TermsOfServ'
 function Pages() {
   const isUserSignedin = !!localStorage.getItem('token')
 
@@ -20,7 +24,12 @@ function Pages() {
   {isUserSignedin && <Route path="/" element={<Home />}  />}
   <Route path='/category/:category' element = {<Type />} />
   <Route path='/products/:id' element ={<Product  />} />
-  <Route path= "/cart" element={<Cart  />} />
+  <Route path= "/cart" element={<Cart1  />} /> 
+  {/* <Route path= "/account" element={<Account  />} />  */}
+  <Route path= "/mainreviews" element={<Reviews  />} /> 
+  <Route path= "/reviews" element={<UserRev  />} /> 
+  <Route path= "/privacypolicy" element={<PrivacyPolicy  />} /> 
+  <Route path= "/termsofservice" element={<TermsOfService  />} /> 
 </Routes>
     </div>
   )

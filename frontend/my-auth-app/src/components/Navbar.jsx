@@ -2,10 +2,10 @@ import React,{ useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { PiBabyLight } from "react-icons/pi";
 import { MdAddShoppingCart } from "react-icons/md";
-import {CartContext} from "./CartContext"
+
 
 function Navbar() {
-const {cartItems} =  useContext(CartContext);
+
 
   const isUserSignedin = !!localStorage.getItem('token');
   const navigate = useNavigate();
@@ -27,13 +27,16 @@ const {cartItems} =  useContext(CartContext);
 
         {isUserSignedin ? (<>
         <Link to='/cart'>
-        <li style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/> ({cartItems.length})
-        </li></Link>
-        <li><button onClick={handleSignout} className='signout-btn'>Sign OUt</button></li>
+        <li style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/></li>
+        
+        </Link>
+      
+        <li><button onClick={handleSignout} className='signout-btn'>Sign Out</button></li>
         </>)
         : <> 
         <Link to="/cart" className="cart-link">
-        <p style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/> ({cartItems.length})</p>
+        <p style={style.cart_count}><MdAddShoppingCart style={style.cart_link}/></p>
+    
       </Link>
         <Link to="/login" className='login-btn'><li>Login</li></Link>
         <Link to="/signup" className='signup-btn' ><li>Sign Up</li></Link>
@@ -53,30 +56,19 @@ const style = {
     position: "relative",
     display: "flex",
       alignItems: "center",
+      
+      height:"30px",
+      width:"30px"
   },
-  cart_count:{
-    position: "absolute",
-      top: "10px",
-      right: "280px",
-      backgroundColor: "red",
-      color: "white",
-      borderRadius: "50%",
-      padding: "5px 10px",
-  }
+  // cart_count:{
+  //   position: "absolute",
+  //     top: "10px",
+  //     right: "280px",
+  //     backgroundColor: "red",
+  //     color: "white",
+  //     borderRadius: "50%",
+  //     padding: "5px 10px",
+  // }
 }
 export default Navbar
-// .cart-link {
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-// }
 
-// .cart-count {
-//   position: absolute;
-//   top: -5px;
-//   right: -10px;
-//   background-color: red;
-//   color: white;
-//   border-radius: 50%;
-//   padding: 5px 10px;
-// }

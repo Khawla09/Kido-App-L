@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-        const response =await axios.post('http://localhost:3005/api/user/login',{username,password});
+        const response =await axios.post('http://localhost:3005/api/user/login',{username,password, });
       setUser(response.data.user);
       localStorage.setItem('token', response.data.token);
     } catch (error) {

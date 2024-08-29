@@ -2,18 +2,18 @@ import React, { useEffect, useState, useContext} from 'react'
 import { useParams } from 'react-router-dom';
 import axios from "axios"
 import { Link  } from 'react-router-dom';
-import {CartContext} from "../components/CartContext"
-import { useCart } from '../components/CartContext';
+import { Cartcontext } from '../context/Context';
+import Category from '../components/Category';
+
 function Type() {
   // const { userId } = useUser()
     //usestae
     let { category } = useParams();
     const [prodCategory, setProdCategory] = useState(null);
     const [error, setError] = useState(null);
-    const { addToCart } = useCart();
-    // const { addToCart , product } = useContext(CartContext);
-   
-
+    const GlobalState= useContext(Cartcontext);
+   const dispatch = GlobalState.dispatch;
+  
     useEffect(() => {
       axios.get(`http://localhost:3005/api/products/category/${category}`)
         .then(response => {
@@ -26,6 +26,7 @@ function Type() {
         });
     }, [category]  
     );
+    //new
   
     if (error) {
       return <div>{error}</div>;
@@ -34,17 +35,19 @@ function Type() {
     if (!prodCategory) {
       return <div>Loading...</div>;
     }
-    const handleAddToCart = (prodId) => {
 
-      addToCart(prodId,1);
-      alert('product added succesfully')
-    };
-  
+   
+  console.log('global state', GlobalState)
+
   return (
+  
 <div className="product-grid"> 
-  {prodCategory.products.map((elm) => (
-    <div className="product-card" key={elm.id}> 
 
+  {prodCategory.products.map((elm, index) =>{ 
+       elm.quantity = 1
+    return(
+
+    <div className="product-card" key={index}> 
 
     <Link to={`/products/${elm._id}`} > <img src={elm.images[0]} alt={elm.name} className="category-detail-image" /></Link> 
       <div className='product-info' key={elm.id}>
@@ -60,10 +63,11 @@ function Type() {
           ))}
         </div>
 
-        <button className="add-to-cart" onClick={() =>handleAddToCart(elm._id)}  >Add to Cart</button>
+        <button className="add-to-cart" onClick={()=>dispatch({type:'ADD', payload: elm}, alert('product added succesfully'))}  >Add to Cart</button>
+        {/* <button className="add-to-cart" onClick={() =>handleAddToCart}  >Add to Cart</button> */}
       </div>
     </div>
-  ))}
+  )})}
 </div>
 
            

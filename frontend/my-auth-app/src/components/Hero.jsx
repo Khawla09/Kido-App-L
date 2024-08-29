@@ -7,9 +7,8 @@ function Hero() {
        <div className='hero_content' style={styling.hero_content}>
   
         <h1 style={styling.h1}>Welcome to the Kids' Store</h1>
-        <p style={styling.p} >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam magni dignissimos eum eveniet, dicta laudantium illum <br />
-        necessitatibus deleniti <br />
-        assumenda autem cumque maiores explicabo numquam ea exercitationem earum soluta doloremque neque?  </p>
+        <p style={styling.p} >Welcome to Kido, an e-commerce platform designed for purchasing kids' shoes, toys, and clothes. This web application allows <br />
+         users to browse products, add items to their cart, manage their accounts, and post reviews on products. </p>
         </div>
     </section>
    

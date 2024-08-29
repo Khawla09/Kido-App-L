@@ -6,10 +6,10 @@ const bcrypt = require("bcrypt");
 
 const registerUser = (async (req, res) => {
     try {
-      const { email, username, password } = req.body;
+      const { email, username, password, name, address } = req.body;
       // bcrypt => password(hide it) 10 is how hard gonna be to decrypt it
       const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = new User({ email, username, password: hashedPassword });
+      const newUser = new User({ email, username, password: hashedPassword, name, address });
       await newUser.save();
       res.status(201).json({ message: "User created successfully" });
     } catch (error) {
@@ -40,7 +40,32 @@ const registerUser = (async (req, res) => {
     res.json(oneUser)
   })
 
-
+  const postProfile =  (async (req, res) => {
+    const userId = req.user.userId; // Extract userId from token
+    const { name, address } = req.body;
+  
+    try {
+      // Check if user exists
+      let user = await User.findById(userId);
+  
+      if (!user) {
+        // User not found
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      // Update user's name and address
+      user.name = name;
+      user.address = address;
+  
+      // Save the updated user
+      await user.save();
+  
+      res.json({ message: 'Profile created/updated successfully', user });
+    } catch (error) {
+      res.status(500).json({ error: 'Error creating/updating profile' });
+    }
+  });
+  
   const userLogin = (async (req, res) => {
     try {
       const { username, password } = req.body;
@@ -65,4 +90,33 @@ const registerUser = (async (req, res) => {
       res.status(500).json({ error: "Error logging in" });
     }
   });
-  module.exports = {registerUser, getRegisteredUsers,getSingleRegistered, deleteRegisteredUser, userLogin} 
+  const getUserProfile = (async(req,res)=>{
+    try {
+      const user = await User.findById(req.user.id).select('-password');//exclude paassword from the rsponse
+      res.json(user)
+    } catch (error) {
+      res.status(500).json({ error: "Error getting user profile" });
+    }
+  });
+  const updateUserProfile = (async(req,res)=>{
+    try {
+      const {name, address} = req.body;
+      const user = await User. findByIdAndUpdate(
+        req.user.id,
+        {name, address},
+        {new: true}
+      )
+      res.json(user)
+    } catch (error) {
+      
+    }
+  })
+  const deleteUserAcc = (async(req, res)=>{
+    try {
+      await User.findByIdAndDelete(req.user.id);
+      res.json({ message: 'User deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  })
+  module.exports = {registerUser, getRegisteredUsers,getSingleRegistered, deleteRegisteredUser, userLogin,  getUserProfile, updateUserProfile, deleteUserAcc, postProfile} 

@@ -8,9 +8,12 @@
     position: relative; /* For positioning if needed */
     bottom: 0;
     width: 100%;
+   
   }
   
   .footer .container {
+    display: flex;
+    flex-direction: column;
     max-width: 1200px; /* Max width for content */
     margin: 0 auto; /* Center the container */
     padding: 0 20px; /* Padding inside the container */
